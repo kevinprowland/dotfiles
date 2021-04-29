@@ -62,16 +62,17 @@ set wildmenu
 let mapleader=" "
 syntax on
 
-set mouse=a
+" Uncomment if you want mouse selections to trigger Visual mode
+"set mouse=a
 
 " ----- Plugin-Specific Settings --------------------------------------
 
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "dark" for light colorscheme
-"set background=dark
+set background=dark
 
 " Uncomment the next line if your terminal is not configured for solarized
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 
 " Set the colorscheme
 colorscheme solarized
@@ -143,9 +144,22 @@ autocmd FileType vimwiki setlocal iskeyword+=45
 " ----- Miscellaneous mappings -----
 nnoremap gb :ls<CR>:b 
 nnoremap <leader>m :!make<CR>
+nnoremap <leader>b :!cargo build<CR>
+nnoremap <leader>r :!cargo run<CR>
 
 " ----- Fuzzy Finder FZF -----
 " If installed using git
 set rtp+=~/.fzf
 
+" ----- Vim memory -----
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" ----- Better markdown code blocks -----
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c']
+"let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 100
 
