@@ -1,5 +1,14 @@
-set nocompatible
+let hasVundle=0
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    let hasVundle=1
+endif
 
+set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -40,6 +49,10 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'michal-h21/vim-zettel'
 
+if hasVundle == 1
+    :PluginInstall
+endif
+
 call vundle#end()
 
 filetype plugin indent on
@@ -75,7 +88,7 @@ set background=dark
 " let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme solarized
+"colorscheme solarized
 colorscheme delek
 
 " Map page up and page down
